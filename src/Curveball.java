@@ -1,5 +1,3 @@
-
-
 public class Curveball
 {
 	public static void main(String[] args)
