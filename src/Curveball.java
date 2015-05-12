@@ -25,6 +25,13 @@ public class Curveball extends JFrame implements MouseListener, MouseMotionListe
 		//Add listeners
 		gp.addMouseListener(gp);
 		gp.addMouseMotionListener(gp);
+		
+		gp.start();
+	}
+	
+	public void start()
+	{
+		System.out.println();
 	}
 
 	@Override
