@@ -1,1 +1,9 @@
-//hello0
+
+
+public class Curveball
+{
+	public static void main(String[] args)
+	{
+		System.out.println("Hello world!");
+	}
+}
