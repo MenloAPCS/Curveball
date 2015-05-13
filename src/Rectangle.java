@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 
@@ -17,6 +18,15 @@ public class Rectangle extends GameObject
 		p4 = p4In;
 	}
 	
+	public Rectangle(Position3D p1In, Position3D p2In, Position3D p3In, Position3D p4In, Color color)
+	{
+		super(getCenter(p1In, p2In, p3In, p4In), color);
+		p1 = p1In;
+		p2 = p2In;
+		p3 = p3In;
+		p4 = p4In;
+	}
+	
 	private static Position3D getCenter(Position3D p1, Position3D p2, Position3D p3, Position3D p4)
 	{
 		double x = (p1.getX() + p2.getX() + p3.getX() + p4.getX()) / 4;
@@ -25,7 +35,9 @@ public class Rectangle extends GameObject
 		return new Position3D(x, y, z);
 	}
 
-	public void render(Graphics g, Camera cam) {
+	public void render(Graphics g, Camera cam)
+	{
+		super.render(g, cam);
 		Position2D d1 = translatePoint(p1, cam);
 		Position2D d2 = translatePoint(p2, cam);
 		Position2D d3 = translatePoint(p3, cam);

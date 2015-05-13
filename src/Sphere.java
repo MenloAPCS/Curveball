@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Sphere extends GameObject
@@ -12,6 +13,12 @@ public class Sphere extends GameObject
 		radius = radiusIn;
 	}
 	
+	public Sphere(int radiusIn, Position3D center, Color color)
+	{
+		super(center, color);
+		radius = radiusIn;
+	}
+	
 	public double getRadius()
 	{
 		return radius;
@@ -19,6 +26,7 @@ public class Sphere extends GameObject
 	
 	public void render(Graphics g, Camera cam)
 	{
+		super.render(g, cam);
 		int radius2D = get2DRadius(cam);
 		Position2D center2D = translatePoint(super.getCenter(), cam);
 		g.fillOval(center2D.getX() - radius2D, center2D.getY() - radius2D, 2*radius2D, 2*radius2D);

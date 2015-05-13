@@ -84,25 +84,15 @@ public class Curveball extends JFrame implements
 		Sphere test = new Sphere(10, new Position3D(0, 0, 70));
 		test.render(g, camera);
 		
-		Sphere s1 = new Sphere(5, new Position3D(-20, 20, 50));
-		Sphere s2 = new Sphere(5, new Position3D(20, 20, 50));
-		Sphere s3 = new Sphere(5, new Position3D(20, -20, 50));
-		Sphere s4 = new Sphere(5, new Position3D(-20, -20, 50));
+		Sphere s1 = new Sphere(5, new Position3D(-20, 20, 50), Color.RED);
+		Sphere s2 = new Sphere(5, new Position3D(20, 20, 50), Color.ORANGE);
+		Sphere s3 = new Sphere(5, new Position3D(20, -20, 50), Color.YELLOW);
+		Sphere s4 = new Sphere(5, new Position3D(-20, -20, 50), Color.GREEN);
 		
-		Sphere s5 = new Sphere(5, new Position3D(-20, 20, 90));
-		Sphere s6 = new Sphere(5, new Position3D(20, 20, 90));
-		Sphere s7 = new Sphere(5, new Position3D(20, -20, 90));
-		Sphere s8 = new Sphere(5, new Position3D(-20, -20, 90));
-		
-		s1.render(g, camera);
-		s2.render(g, camera);
-		s3.render(g, camera);
-		s4.render(g, camera);
-		
-		s5.render(g, camera);
-		s6.render(g, camera);
-		s7.render(g, camera);
-		s8.render(g, camera);
+		Sphere s5 = new Sphere(5, new Position3D(-20, 20, 90), Color.CYAN);
+		Sphere s6 = new Sphere(5, new Position3D(20, 20, 90), Color.BLUE);
+		Sphere s7 = new Sphere(5, new Position3D(20, -20, 90), Color.RED);
+		Sphere s8 = new Sphere(5, new Position3D(-20, -20, 90), Color.GRAY);
 		
 		Position3D p1 = new Position3D(-20, 20, 50);
 		Position3D p2 = new Position3D(20, 20, 50);
@@ -127,6 +117,16 @@ public class Curveball extends JFrame implements
 		rect4.render(g, camera);
 		rect5.render(g, camera);
 		rect6.render(g, camera);
+		
+		s1.render(g, camera);
+		s2.render(g, camera);
+		s3.render(g, camera);
+		s4.render(g, camera);
+		
+		s5.render(g, camera);
+		s6.render(g, camera);
+		s7.render(g, camera);
+		s8.render(g, camera);
 	}
 
 	@Override

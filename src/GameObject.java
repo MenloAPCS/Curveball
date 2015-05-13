@@ -1,12 +1,20 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class GameObject 
 {
 	private Position3D center;
+	private Color color = Color.GREEN;
 	
 	public GameObject(Position3D centerIn)
 	{
 		center = centerIn;
+	}
+	
+	public GameObject(Position3D centerIn, Color colorIn)
+	{
+		center = centerIn;
+		color = colorIn;
 	}
 	
 	public void setCenter(Position3D centerIn)
@@ -14,9 +22,19 @@ public abstract class GameObject
 		center = centerIn;
 	}
 	
+	public void setColor(Color colorIn)
+	{
+		color = colorIn;
+	}
+	
 	public Position3D getCenter()
 	{
 		return center;
+	}
+	
+	public Color getColor()
+	{
+		return color;
 	}
 	
 	public int getIntDistance(Camera cam)
@@ -33,7 +51,10 @@ public abstract class GameObject
 		return Math.sqrt(x + y + z);
 	}
 	
-	public abstract void render(Graphics g, Camera cam);
+	public void render(Graphics g, Camera cam)
+	{
+		g.setColor(color);
+	}
 	
 	//http://en.wikipedia.org/wiki/3D_projection
 	public static Position2D translatePoint(
