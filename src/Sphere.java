@@ -42,7 +42,7 @@ public class Sphere extends GameObject
 			Math.abs(center.getY() - camPos.getY()) / distance
 		);
 		Position3D top = new Position3D(
-			center.getX(), 
+			center.getX() + radius*Math.sin(yAngle), 
 			center.getY() + radius*Math.cos(yAngle),
 			center.getZ() + radius*Math.sin(yAngle)
 		);

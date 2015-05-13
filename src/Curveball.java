@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.HashSet;
 
 import javax.swing.JFrame;
 
@@ -19,6 +20,8 @@ public class Curveball extends JFrame implements
 	private Camera camera = new Camera(
 			new Position3D(-60, 0, 10), new Orientation(0, Math.PI/4, 0)
 	);
+	
+	private HashSet<Character> activeEvents = new HashSet<Character>();
 	
 	public static void main(String[] args)
 	{
@@ -42,35 +45,24 @@ public class Curveball extends JFrame implements
 	
 	public void start()
 	{
-		int d = 120;
 		while(true)
 		{
-			for(int i = 0; i < d; i++)
+			//System.out.println(activeEvents);
+			if(activeEvents.size() > 0)
 			{
-				camera.move(1, 0, 0);
-				camera.turn(0, -Math.PI/2/d, 0);
+				for(Character c: activeEvents)
+				{
+					charPressed(c);
+				}
 				repaint();
 			}
-			
-			for(int i = 0; i < d; i++)
+			try
 			{
-				camera.move(0, 0, 1);
-				camera.turn(0, -Math.PI/2/d, 0);
-				repaint();
+				Thread.sleep(10);
 			}
-			
-			for(int i = 0; i < d; i++)
+			catch (InterruptedException e)
 			{
-				camera.move(-1, 0, 0);
-				camera.turn(0, -Math.PI/2/d, 0);
-				repaint();
-			}
-			
-			for(int i = 0; i < d; i++)
-			{
-				camera.move(0, 0, -1);
-				camera.turn(0, -Math.PI/2/d, 0);
-				repaint();
+				e.printStackTrace();
 			}
 		}
 	}
@@ -171,56 +163,58 @@ public class Curveball extends JFrame implements
 		
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getKeyChar() == 'w')
+	public void keyPressed(KeyEvent e)
+	{
+		this.repaint(e.getKeyChar());
+		activeEvents.add(e.getKeyChar());
+	}
+	
+	private void charPressed(char c)
+	{
+		if(c == 'w')
 		{
 			camera.move(0, 0, 1);
 		}
-		else if(e.getKeyChar() == 'a')
+		else if(c == 'a')
 		{
 			camera.move(-1, 0, 0);
 		}
-		else if(e.getKeyChar() == 's')
+		else if(c == 's')
 		{
 			camera.move(0, 0, -1);
 		}
-		else if(e.getKeyChar() == 'd')
+		else if(c == 'd')
 		{
 			camera.move(1, 0, 0);
 		}
-		else if(e.getKeyChar() == 'q')
+		else if(c == 'q')
 		{
 			camera.move(0, 1, 0);
 		}
-		else if(e.getKeyChar() == 'z')
+		else if(c == 'z')
 		{
 			camera.move(0, -1, 0);
 		}
-		else if(e.getKeyChar() == 'i')
+		else if(c == 'i')
 		{
 			camera.turn(.01, 0, 0);
 		}
-		else if(e.getKeyChar() == 'j')
+		else if(c == 'j')
 		{
 			camera.turn(0, -.01, 0);
 		}
-		else if(e.getKeyChar() == 'k')
+		else if(c == 'k')
 		{
 			camera.turn(-.01, 0, 0);
 		}
-		else if(e.getKeyChar() == 'l')
+		else if(c == 'l')
 		{
 			camera.turn(0, .01, 0);
 		}
-		this.repaint();
 	}
 
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyReleased(KeyEvent e) {
+		activeEvents.remove(e.getKeyChar());
 	}
 
 	@Override

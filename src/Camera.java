@@ -37,12 +37,6 @@ public class Camera
 				new Position3D(c.getX() + x, c.getY() + y, c.getZ() + z
 			)
 		);
-		try {
-			Thread.sleep(15);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	public void turn(double x, double y, double z)
