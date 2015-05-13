@@ -128,9 +128,9 @@ public class Curveball extends JFrame implements
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mouseMoved(MouseEvent arg0) 
+	{
+	
 	}
 
 	@Override
