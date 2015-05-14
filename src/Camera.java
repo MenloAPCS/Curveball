@@ -1,49 +1,49 @@
 
 public class Camera
 {
-	private Position3D pos;
-	private Orientation orient;
+	private Vector3 pos;
+	private Vector3 orient;
 	
-	public Camera(Position3D posIn, Orientation orientIn)
+	public Camera(Vector3 posIn, Vector3 orientIn)
 	{
 		pos = posIn;
 		orient = orientIn;
 	}
 	
-	public void setPosition(Position3D posIn)
+	public void setPosition(Vector3 posIn)
 	{
 		pos = posIn;
 	}
 	
-	public void setOrientation(Orientation orientIn)
+	public void setOrientation(Vector3 orientIn)
 	{
 		orient = orientIn;
 	}
 	
-	public Position3D getPosition()
+	public Vector3 getPosition()
 	{
 		return pos;
 	}
 	
-	public Orientation getOrientation()
+	public Vector3 getOrientation()
 	{
 		return orient;
 	}
 	
 	public void move(int x, int y, int z)
 	{
-		Position3D c = getPosition();
+		Vector3 c = getPosition();
 			setPosition(
-				new Position3D(c.getX() + x, c.getY() + y, c.getZ() + z
+				new Vector3(c.getX() + x, c.getY() + y, c.getZ() + z
 			)
 		);
 	}
 	
 	public void turn(double x, double y, double z)
 	{
-		Orientation c = getOrientation();
+		Vector3 c = getOrientation();
 		setOrientation(
-			new Orientation(c.getX() + x, c.getY() + y, c.getZ() + z)
+			new Vector3(c.getX() + x, c.getY() + y, c.getZ() + z)
 		);
 	}
 }
