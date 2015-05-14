@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class GameObject 
+public abstract class GameObject
 {
 	private Position3D center;
 	private Color color = Color.GREEN;
@@ -37,6 +37,20 @@ public abstract class GameObject
 		return color;
 	}
 	
+	public int compareTo(GameObject obj, Camera cam)
+	{
+		double objDist = obj.getDistance(cam);
+		double thisDist = getDistance(cam);
+		if(thisDist - objDist > 0)
+		{
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	
 	public int getIntDistance(Camera cam)
 	{
 		return (int) getDistance(cam);
@@ -45,10 +59,7 @@ public abstract class GameObject
 	public double getDistance(Camera cam)
 	{
 		Position3D camPos = cam.getPosition();
-		double x = Math.pow(center.getX() - camPos.getX(), 2);
-		double y = Math.pow(center.getY() - camPos.getY(), 2);
-		double z = Math.pow(center.getZ() - camPos.getZ(), 2);
-		return Math.sqrt(x + y + z);
+		return distanceBetweenPoints(center, camPos);
 	}
 	
 	public void render(Graphics g, Camera cam)
@@ -91,5 +102,22 @@ public abstract class GameObject
 		double bY = (eZ/dZ)*dY - eY;
 		
 		return new Position2D((int) bX, (int) bY);
+	}
+	
+	public static double distanceBetweenPoints(Position3D p1, Position3D p2)
+	{
+		double x = p1.getX() - p2.getX();
+		double y = p1.getY() - p2.getY();
+		double z = p1.getZ() - p2.getZ();
+		System.out.println("x: " + x + ", y: " + y + ", z: " + z);
+		return Math.sqrt(x*x + y*y + z*z);
+	}
+	
+	public static double distanceBetweenPoints(Position2D p1, Position2D p2)
+	{
+		double x = p1.getX() - p2.getX();
+		double y = p1.getY() - p2.getY();
+		System.out.println("x: " + x + ", y: " + y);
+		return Math.sqrt(x*x + y*y);
 	}
 }
