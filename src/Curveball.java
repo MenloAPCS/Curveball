@@ -17,11 +17,11 @@ public class Curveball extends JFrame implements
 	public static final int HEADER_Y = 20;
 	
 	public static final Vector3 LOWER_LEFT_CORNER = new Vector3(-70, -50, 50);
-	public static final Vector3 UPPER_RIGHT_CORNER = new Vector3(70, 50, 650);
+	public static final Vector3 UPPER_RIGHT_CORNER = new Vector3(70, 50, 500);
 	public static final Vector3 BALL_START = new Vector3(0, 0, 65);
 	
-	public static final double BALL_RADIUS = 5.0;
-	public static final double BALL_Z_ACCEL = 0.05;
+	public static final double BALL_RADIUS = 8.0;
+	public static final double BALL_Z_ACCEL = 0.4;
 	public static final Color BALL_COLOR = Color.GREEN;
 	
 	private Workspace3D workspace;
