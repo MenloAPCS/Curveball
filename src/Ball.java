@@ -66,8 +66,8 @@ public class Ball extends Sphere
 	
 	public void step()
 	{
-		System.out.println("Step!");
-		System.out.println("c: " + super.getCenter() + ", v: " + velocity + ", a: " + acceleration);
+		//System.out.println("Step!");
+		//System.out.println("c: " + super.getCenter() + ", v: " + velocity + ", a: " + acceleration);
 		velocity = velocity.add(acceleration);
 		Vector3 center = super.getCenter();
 		adjustForCollisions(center);
