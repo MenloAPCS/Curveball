@@ -16,8 +16,8 @@ public class Curveball extends JFrame implements
 	public static final int WINDOW_SIZE = 512;
 	public static final int HEADER_Y = 20;
 	
-	public static final Vector3 LOWER_LEFT_CORNER = new Vector3(-50, -50, 50);
-	public static final Vector3 UPPER_RIGHT_CORNER = new Vector3(50, 50, 150);
+	public static final Vector3 LOWER_LEFT_CORNER = new Vector3(-70, -50, 50);
+	public static final Vector3 UPPER_RIGHT_CORNER = new Vector3(70, 50, 650);
 	public static final Vector3 BALL_START = new Vector3(0, 0, 65);
 	
 	public static final double BALL_RADIUS = 5.0;
@@ -54,17 +54,16 @@ public class Curveball extends JFrame implements
 	
 	private void setupWorkspace()
 	{
-		workspace = new Workspace3D();
 		Ball ball = new Ball(
 			BALL_RADIUS, BALL_START,
 			LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER,
 			BALL_Z_ACCEL, BALL_COLOR
 		);
-		ball.setAcceleration(new Vector3(0, -0.09, 0));
-		ball.setVelocity(new Vector3(0.5, 0.3, -1));
+		ball.setAcceleration(new Vector3(0, 0, 0));
+		ball.setVelocity(new Vector3(0, 0, -5));
+		workspace = new Workspace3D(ball);
 		Cube cube = new Cube(LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER);
 		workspace.addObject(cube);
-		workspace.addBall(ball);
 	}
 	
 	private void loopGame()
