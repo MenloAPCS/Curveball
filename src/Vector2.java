@@ -1,10 +1,10 @@
 
-public class Position2D
+public class Vector2
 {
 	private int x;
 	private int y;
 	
-	public Position2D(int xIn, int yIn)
+	public Vector2(int xIn, int yIn)
 	{
 		x = xIn;
 		y = yIn;

@@ -1,11 +1,11 @@
 
-public class Position3D
+public class Vector3
 {
 	private double x;
 	private double y;
 	private double z;
 	
-	public Position3D(double xIn, double yIn, double zIn)
+	public Vector3(double xIn, double yIn, double zIn)
 	{
 		x = xIn;
 		y = yIn;
@@ -40,6 +40,16 @@ public class Position3D
 	public double getZ()
 	{
 		return z;
+	}
+	
+	public Vector3 add(Vector3 v)
+	{
+		return new Vector3(x + v.getX(), y + v.getY(), z + v.getZ());
+	}
+	
+	public Vector3 multiply(Vector3 v)
+	{
+		return new Vector3(x * v.getX(), y * v.getY(), z * v.getZ());
 	}
 	
 	public String toString()
