@@ -23,7 +23,7 @@ public class Curveball extends JFrame implements
 	
 	public static final double BALL_RADIUS = 5.0;
 	public static final double BALL_Z_ACCEL = 0.05;
-	public static final Color BALL_COLOR = Color.RED;
+	public static final Color BALL_COLOR = Color.GREEN;
 	
 	private Workspace3D workspace;
 	
