@@ -2,10 +2,10 @@ import java.awt.Color;
 
 public class Ball extends Sphere
 {
-	Vector3 velocity;
-	Vector3 acceleration;
-	Vector3 lowerLeftBound;
-	Vector3 upperRightBound;
+	private Vector3 velocity;
+	private Vector3 acceleration;
+	private Vector3 lowerLeftBound;
+	private Vector3 upperRightBound;
 	
 	public Ball(
 		double radius,
@@ -62,6 +62,16 @@ public class Ball extends Sphere
 	public Vector3 getAcceleration()
 	{
 		return acceleration;
+	}
+	
+	public Vector3 getLowerLeft()
+	{
+		return lowerLeftBound;
+	}
+	
+	public Vector3 getUpperRight()
+	{
+		return upperRightBound;
 	}
 	
 	public void step()
