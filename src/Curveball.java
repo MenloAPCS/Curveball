@@ -10,7 +10,6 @@ import java.util.HashSet;
 import javax.swing.JFrame;
 
 
-//PLEASE DISREGARD THE HORRIBLE CODE I MADE FOR THE DEMO!!!
 public class Curveball extends JFrame implements
 	KeyListener, MouseListener, MouseMotionListener
 {
