@@ -17,6 +17,14 @@ public class Curveball extends JFrame implements
 	public static final int WINDOW_SIZE = 512;
 	public static final int HEADER_Y = 20;
 	
+	public static final Vector3 LOWER_LEFT_CORNER = new Vector3(-50, -50, 60);
+	public static final Vector3 UPPER_RIGHT_CORNER = new Vector3(50, 50, 160);
+	public static final Vector3 BALL_START = new Vector3(0, 0, 65);
+	
+	public static final double BALL_RADIUS = 5.0;
+	public static final double BALL_Z_ACCEL = 0.05;
+	public static final Color BALL_COLOR = Color.RED;
+	
 	private Workspace3D workspace;
 	
 	private HashSet<Character> activeEvents = new HashSet<Character>();
@@ -41,8 +49,40 @@ public class Curveball extends JFrame implements
 	
 	public void start()
 	{
+		setupWorkspace();
+		loopGame();
+	}
+	
+	private void setupWorkspace()
+	{
 		workspace = new Workspace3D();
-		workspace.addObject(new Sphere(5, new Position3D(0, 0, 50), Color.RED));
+		Ball ball = new Ball(
+			BALL_RADIUS, BALL_START,
+			LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER,
+			BALL_Z_ACCEL, BALL_COLOR
+		);
+		ball.setAcceleration(new Vector3(0, -0.09, 0));
+		ball.setVelocity(new Vector3(0.5, 0.3, -1));
+		workspace.addBall(ball);
+		Cube cube = new Cube(LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER);
+		workspace.addObject(cube);
+	}
+	
+	private void loopGame()
+	{
+		while(true)
+		{
+			workspace.step();
+			repaint();
+			try
+			{
+				Thread.sleep(15);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void paint(Graphics g)
