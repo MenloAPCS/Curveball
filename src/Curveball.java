@@ -22,7 +22,7 @@ public class Curveball extends JFrame implements
 	public static final Vector3 UPPER_RIGHT_CORNER = new Vector3(70, 50, 500);
 	public static final Vector3 BALL_START = new Vector3(0, 0, 65);
 	
-	public static final double BALL_RADIUS = 8.0;
+	public static final double BALL_RADIUS = 8.2;
 	public static final double BALL_Z_ACCEL = 0.4;
 	public static final Color BALL_COLOR = Color.GREEN;
 	
