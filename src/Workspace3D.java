@@ -8,7 +8,7 @@ public class Workspace3D
 	private Camera camera;
 	private ArrayList<GameObject> objects;
 	private Ball ball;
-	private Cube trace;
+	private Cube tracer;
 	
 	public Workspace3D(Ball ballIn)
 	{
@@ -21,9 +21,9 @@ public class Workspace3D
 		Vector3 ballUpperRight = ball.getUpperRight();
 		Vector3 cubeUpperRight = new Vector3(ballUpperRight.getX(), ballUpperRight.getY(), ball.getCenter().getZ());
 		System.out.println(cubeLowerLeft + " " + cubeUpperRight);
-		trace = new Cube(cubeLowerLeft, cubeUpperRight, Color.WHITE);
-		objects.add(trace);
-		System.out.println(trace);
+		tracer = new Cube(cubeLowerLeft, cubeUpperRight, Color.WHITE);
+		objects.add(tracer);
+		System.out.println(tracer);
 	}
 	
 	public Camera getCamera()
@@ -49,13 +49,17 @@ public class Workspace3D
 	public void step()
 	{
 		ball.step();
+		stepTracer();
 		//camera.setPosition(camera.getPosition().add(ball.getVelocity()));
-		
-		Vector3 cubeLowerLeft = trace.getLowerLeft();
-		Vector3 cubeUpperRight = trace.getUpperRight();
+	}
+	
+	public void stepTracer()
+	{
+		Vector3 cubeLowerLeft = tracer.getLowerLeft();
+		Vector3 cubeUpperRight = tracer.getUpperRight();
 		cubeLowerLeft = new Vector3(cubeLowerLeft.getX(), cubeLowerLeft.getY(), ball.getCenter().getZ());
-		cubeUpperRight = new Vector3(cubeUpperRight.getX(), cubeUpperRight.getY(), ball.getCenter().getZ() + 1);
-		trace.setLowerLeft(cubeLowerLeft);
-		trace.setUpperRight(cubeUpperRight);
+		cubeUpperRight = new Vector3(cubeUpperRight.getX(), cubeUpperRight.getY(), ball.getCenter().getZ());
+		tracer.setLowerLeft(cubeLowerLeft);
+		tracer.setUpperRight(cubeUpperRight);
 	}
 }

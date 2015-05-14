@@ -16,6 +16,8 @@ public class Curveball extends JFrame implements
 	public static final int WINDOW_SIZE = 512;
 	public static final int HEADER_Y = 20;
 	
+	public static final int NUM_DIVIDERS = 10;
+	
 	public static final Vector3 LOWER_LEFT_CORNER = new Vector3(-70, -50, 50);
 	public static final Vector3 UPPER_RIGHT_CORNER = new Vector3(70, 50, 650);
 	public static final Vector3 BALL_START = new Vector3(0, 0, 65);
@@ -62,8 +64,18 @@ public class Curveball extends JFrame implements
 		ball.setAcceleration(new Vector3(0, 0, 0));
 		ball.setVelocity(new Vector3(0, 0, -5));
 		workspace = new Workspace3D(ball);
-		Cube cube = new Cube(LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER);
-		workspace.addObject(cube);
+		Cube bounds = new Cube(LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER);
+		workspace.addObject(bounds);
+		int zDistance = (int) (UPPER_RIGHT_CORNER.getZ() - LOWER_LEFT_CORNER.getZ());
+		int interval = zDistance / (NUM_DIVIDERS + 1);
+		for(int i = 1; i <= NUM_DIVIDERS; i++)
+		{
+			int z = ((int) LOWER_LEFT_CORNER.getZ()) + i * interval;
+			Vector3 lowerLeft = new Vector3(LOWER_LEFT_CORNER.getX(), LOWER_LEFT_CORNER.getY(), z);
+			Vector3 upperRight = new Vector3(UPPER_RIGHT_CORNER.getX(), UPPER_RIGHT_CORNER.getY(), z);
+			Cube divider = new Cube(lowerLeft, upperRight);
+			workspace.addObject(divider);
+		}
 	}
 	
 	private void loopGame()
