@@ -10,15 +10,14 @@ import java.util.HashSet;
 import javax.swing.JFrame;
 
 
-//PLEASE DISREGARD THE HORRIBLE CODE I MADE FOR THE DEMO!!!
 public class Curveball extends JFrame implements
 	KeyListener, MouseListener, MouseMotionListener
 {
 	public static final int WINDOW_SIZE = 512;
 	public static final int HEADER_Y = 20;
 	
-	public static final Vector3 LOWER_LEFT_CORNER = new Vector3(-50, -50, 60);
-	public static final Vector3 UPPER_RIGHT_CORNER = new Vector3(50, 50, 160);
+	public static final Vector3 LOWER_LEFT_CORNER = new Vector3(-50, -50, 50);
+	public static final Vector3 UPPER_RIGHT_CORNER = new Vector3(50, 50, 150);
 	public static final Vector3 BALL_START = new Vector3(0, 0, 65);
 	
 	public static final double BALL_RADIUS = 5.0;
@@ -63,9 +62,9 @@ public class Curveball extends JFrame implements
 		);
 		ball.setAcceleration(new Vector3(0, -0.09, 0));
 		ball.setVelocity(new Vector3(0.5, 0.3, -1));
-		workspace.addBall(ball);
 		Cube cube = new Cube(LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER);
 		workspace.addObject(cube);
+		workspace.addBall(ball);
 	}
 	
 	private void loopGame()
