@@ -27,6 +27,27 @@ public class Rectangle extends GameObject
 		p4 = p4In;
 	}
 	
+	
+	public Rectangle(Vector3 center, double width, double height)
+	{
+		super(center);
+		p1 = center.add(new Vector3(-width/2.0, height/2.0, 0));
+		p2 = center.add(new Vector3(width/2.0, height/2.0, 0));
+		p3 = center.add(new Vector3(width/2.0, -height/2.0, 0));
+		p4 = center.add(new Vector3(-width/2.0, -height/2.0, 0));
+	}
+	
+	public void setCenter(Vector3 center)
+	{
+		super.setCenter(center);
+		Vector3 centerOld = getCenter(p1, p2, p3, p4);
+		Vector3 diff = center.add(centerOld.multiply(new Vector3(-1.0, -1.0, -1.0)));
+		p1 = p1.add(diff);
+		p2 = p2.add(diff);
+		p3 = p3.add(diff);
+		p4 = p4.add(diff);
+	}
+	
 	private static Vector3 getCenter(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4)
 	{
 		double x = (p1.getX() + p2.getX() + p3.getX() + p4.getX()) / 4;
