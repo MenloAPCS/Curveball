@@ -30,7 +30,7 @@ public class Workspace3D
 		float alpha = (float) 0.7;
 		System.out.println(alpha);
 		Color paddleColor = new Color(rgb, rgb, rgb, alpha);
-		paddle = new Paddle(new Vector3(0, 0, 50), 33.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor);
+		paddle = new Paddle(new Vector3(0, 0, 50), 32.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor);
 		objects.add(paddle);
 		System.out.println(tracer);
 	}

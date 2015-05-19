@@ -6,14 +6,17 @@ public class Paddle extends Rectangle
 	private Vector2 upperRightBound;
 	private Vector2 lowerLeftBound;
 	
+	private Vector2 lastPos;
+	
 	private double width;
 	private double height;
 	
 	public Paddle(Vector3 center, double widthIn, double heightIn, Vector2 upperRightBoundIn, Vector2 lowerLeftBoundIn, Color colorIn)
 	{
 		super(center, widthIn, heightIn);
-		upperRightBound = upperRightBoundIn;
-		lowerLeftBound = lowerLeftBoundIn;
+		upperRightBound = upperRightBoundIn.add(new Vector2((int) -widthIn/2, (int) -heightIn/2));
+		lowerLeftBound = lowerLeftBoundIn.add(new Vector2((int) widthIn/2, (int) heightIn/2));
+		//lastPos = new
 		width = widthIn;
 		height = heightIn;
 		super.setColor(colorIn);
@@ -23,19 +26,19 @@ public class Paddle extends Rectangle
 	{
 		if(center.getX() > upperRightBound.getX())
 		{
-			center.setX(upperRightBound.getX() - width / 2.0);
+			center.setX(upperRightBound.getX());
 		}
 		if(center.getY() > upperRightBound.getY())
 		{
-			center.setY(upperRightBound.getY() - height / 2.0);
+			center.setY(upperRightBound.getY());
 		}
 		if(center.getX() < lowerLeftBound.getX())
 		{
-			center.setX(lowerLeftBound.getX() + width / 2.0);
+			center.setX(lowerLeftBound.getX());
 		}
 		if(center.getY() < lowerLeftBound.getY())
 		{
-			center.setY(lowerLeftBound.getY() + height / 2.0);
+			center.setY(lowerLeftBound.getY());
 		}
 		super.setCenter(center);
 	}
