@@ -74,17 +74,17 @@ public class Ball extends Sphere
 		return upperRightBound;
 	}
 	
-	public void step()
+	public void step(Paddle paddle)
 	{
 		//System.out.println("Step!");
 		//System.out.println("c: " + super.getCenter() + ", v: " + velocity + ", a: " + acceleration);
 		velocity = velocity.add(acceleration);
 		Vector3 center = super.getCenter();
-		adjustForCollisions(center);
+		adjustForCollisions(center, paddle);
 		super.setCenter(center.add(velocity));
 	}
 	
-	private void adjustForCollisions(Vector3 center)
+	private void adjustForCollisions(Vector3 center, Paddle paddle)
 	{
 		Vector3 nextPos = center.add(velocity);
 		double radius = super.getRadius();
@@ -107,6 +107,28 @@ public class Ball extends Sphere
 			nextPos.getZ() - radius < lowerLeftBound.getZ()
 		)
 		{
+			if(nextPos.getZ() - radius < lowerLeftBound.getZ())
+			{
+				Vector3 paddlePos3D = paddle.getCenter();
+				Vector2 paddlePos = new Vector2((int) paddlePos3D.getX(), (int) paddlePos3D.getY());
+				
+				if(
+					Math.abs(nextPos.getX() - paddlePos.getX()) < paddle.getWidth() &&
+					Math.abs(nextPos.getY() - paddlePos.getY()) < paddle.getHeight()
+				)
+				{
+					Vector2 ballAccel = paddle.getVelocity().multiply(new Vector2(-1, -1));
+					Vector3 ballAccel3D = new Vector3(ballAccel.getX(), ballAccel.getY(), Curveball.BALL_Z_ACCEL);
+					ballAccel3D = ballAccel3D.multiply(new Vector3(0.01, 0.01, 1.0));
+					System.out.println("Accel: " + ballAccel3D);
+					setAcceleration(ballAccel3D);
+				}
+				else
+				{
+					System.out.println("Die!");
+					System.exit(0);
+				}
+			}
 			velocity = velocity.multiply(new Vector3(1, 1, -1));
 		}
 	}

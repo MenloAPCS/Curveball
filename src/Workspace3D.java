@@ -84,7 +84,7 @@ public class Workspace3D
 	
 	public void step()
 	{
-		ball.step();
+		ball.step(paddle);
 		stepTracer();
 		//camera.setPosition(camera.getPosition().add(new Vector3(.25*ball.getVelocity().getX(), .25*ball.getVelocity().getY(), 0)));
 	}

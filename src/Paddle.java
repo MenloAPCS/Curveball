@@ -7,6 +7,8 @@ public class Paddle extends Rectangle
 	private Vector2 lowerLeftBound;
 	
 	private Vector2 lastPos;
+	private Vector2 velocity;
+	private int moveIndex = 0;
 	
 	private double width;
 	private double height;
@@ -20,6 +22,21 @@ public class Paddle extends Rectangle
 		width = widthIn;
 		height = heightIn;
 		super.setColor(colorIn);
+	}
+	
+	public Vector2 getVelocity()
+	{
+		return velocity;
+	}
+	
+	public double getWidth()
+	{
+		return width;
+	}
+	
+	public double getHeight()
+	{
+		return height;
 	}
 	
 	public void setCenter(Vector3 center)
@@ -40,6 +57,17 @@ public class Paddle extends Rectangle
 		{
 			center.setY(lowerLeftBound.getY());
 		}
+		
+		if(moveIndex % 5 == 0)
+		{
+			Vector2 currentPos = new Vector2((int) center.getX(), (int) center.getY());
+			if(lastPos != null)
+			{
+				velocity = currentPos.add(lastPos.multiply(new Vector2(-1, -1)));
+			}
+			lastPos = currentPos;
+		}
+		moveIndex++;
 		super.setCenter(center);
 	}
 	
