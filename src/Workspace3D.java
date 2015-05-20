@@ -9,7 +9,7 @@ public class Workspace3D
 	private ArrayList<GameObject> objects;
 	private Ball ball;
 	private Cube tracer;
-	private Paddle paddle;
+	private Paddle playerPaddle;
 	
 	private boolean isRunning = false;
 	
@@ -30,8 +30,8 @@ public class Workspace3D
 		float alpha = (float) 0.7;
 		System.out.println(alpha);
 		Color paddleColor = new Color(rgb, rgb, rgb, alpha);
-		paddle = new Paddle(new Vector3(0, 0, 50), 32.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor);
-		objects.add(paddle);
+		playerPaddle = new Paddle(new Vector3(0, 0, 50), 32.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor);
+		objects.add(playerPaddle);
 		System.out.println(tracer);
 	}
 	
@@ -64,7 +64,7 @@ public class Workspace3D
 		//System.out.println(paddleCoords);
 		paddleCoords = new Vector3(paddleCoords.getX() - 70, 50 - paddleCoords.getY(), paddleCoords.getZ());
 		//System.out.println("\n");
-		paddle.setCenter(paddleCoords);
+		playerPaddle.setCenter(paddleCoords);
 	}
 	
 	public void addObject(GameObject obj)
@@ -84,7 +84,7 @@ public class Workspace3D
 	
 	public void step()
 	{
-		ball.step(paddle);
+		ball.step(playerPaddle);
 		stepTracer();
 		//camera.setPosition(camera.getPosition().add(new Vector3(.25*ball.getVelocity().getX(), .25*ball.getVelocity().getY(), 0)));
 	}
