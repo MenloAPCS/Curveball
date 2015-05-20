@@ -74,29 +74,17 @@ public class Ball extends Sphere
 		return upperRightBound;
 	}
 	
-<<<<<<< HEAD
 	public void step(Paddle playerPaddle, Paddle enemyPaddle)
-=======
-	public void step()
->>>>>>> origin/master
 	{
 		//System.out.println("Step!");
 		//System.out.println("c: " + super.getCenter() + ", v: " + velocity + ", a: " + acceleration);
 		velocity = velocity.add(acceleration);
 		Vector3 center = super.getCenter();
-<<<<<<< HEAD
 		adjustForCollisions(center, playerPaddle, enemyPaddle);
 		super.setCenter(center.add(velocity));
 	}
 	
 	private void adjustForCollisions(Vector3 center, Paddle playerPaddle, Paddle enemyPaddle)
-=======
-		adjustForCollisions(center);
-		super.setCenter(center.add(velocity));
-	}
-	
-	private void adjustForCollisions(Vector3 center)
->>>>>>> origin/master
 	{
 		Vector3 nextPos = center.add(velocity);
 		double radius = super.getRadius();
