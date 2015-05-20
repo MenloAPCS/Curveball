@@ -6,68 +6,37 @@ public class Paddle extends Rectangle
 	private Vector2 upperRightBound;
 	private Vector2 lowerLeftBound;
 	
-	private Vector2 lastPos;
-	private Vector2 velocity;
-	private int moveIndex = 0;
-	
 	private double width;
 	private double height;
 	
 	public Paddle(Vector3 center, double widthIn, double heightIn, Vector2 upperRightBoundIn, Vector2 lowerLeftBoundIn, Color colorIn)
 	{
 		super(center, widthIn, heightIn);
-		upperRightBound = upperRightBoundIn.add(new Vector2((int) -widthIn/2, (int) -heightIn/2));
-		lowerLeftBound = lowerLeftBoundIn.add(new Vector2((int) widthIn/2, (int) heightIn/2));
-		//lastPos = new
+		upperRightBound = upperRightBoundIn;
+		lowerLeftBound = lowerLeftBoundIn;
 		width = widthIn;
 		height = heightIn;
 		super.setColor(colorIn);
-	}
-	
-	public Vector2 getVelocity()
-	{
-		return velocity;
-	}
-	
-	public double getWidth()
-	{
-		return width;
-	}
-	
-	public double getHeight()
-	{
-		return height;
 	}
 	
 	public void setCenter(Vector3 center)
 	{
 		if(center.getX() > upperRightBound.getX())
 		{
-			center.setX(upperRightBound.getX());
+			center.setX(upperRightBound.getX() - width / 2.0);
 		}
 		if(center.getY() > upperRightBound.getY())
 		{
-			center.setY(upperRightBound.getY());
+			center.setY(upperRightBound.getY() - height / 2.0);
 		}
 		if(center.getX() < lowerLeftBound.getX())
 		{
-			center.setX(lowerLeftBound.getX());
+			center.setX(lowerLeftBound.getX() + width / 2.0);
 		}
 		if(center.getY() < lowerLeftBound.getY())
 		{
-			center.setY(lowerLeftBound.getY());
+			center.setY(lowerLeftBound.getY() + height / 2.0);
 		}
-		
-		if(moveIndex % 5 == 0)
-		{
-			Vector2 currentPos = new Vector2((int) center.getX(), (int) center.getY());
-			if(lastPos != null)
-			{
-				velocity = currentPos.add(lastPos.multiply(new Vector2(-1, -1)));
-			}
-			lastPos = currentPos;
-		}
-		moveIndex++;
 		super.setCenter(center);
 	}
 	
