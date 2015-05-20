@@ -9,9 +9,6 @@ public class Workspace3D
 	private ArrayList<GameObject> objects;
 	private Ball ball;
 	private Cube tracer;
-	private Paddle paddle;
-	
-	private boolean isRunning = false;
 	
 	public Workspace3D(Ball ballIn)
 	{
@@ -26,45 +23,12 @@ public class Workspace3D
 		System.out.println(cubeLowerLeft + " " + cubeUpperRight);
 		tracer = new Cube(cubeLowerLeft, cubeUpperRight, Color.WHITE);
 		objects.add(tracer);
-		float rgb = (float) 0.8;
-		float alpha = (float) 0.7;
-		System.out.println(alpha);
-		Color paddleColor = new Color(rgb, rgb, rgb, alpha);
-		paddle = new Paddle(new Vector3(0, 0, 50), 33.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor);
-		objects.add(paddle);
 		System.out.println(tracer);
-	}
-	
-	public boolean isRunning()
-	{
-		return isRunning;
 	}
 	
 	public Camera getCamera()
 	{
 		return camera;
-	}
-	
-	public void start()
-	{
-		ball.setVelocity(new Vector3(0, 0, Curveball.BALL_SPEED));
-		isRunning = true;
-	}
-	
-	public void movePaddle(Vector2 mouse)
-	{
-		//(27, 155) and (774, 155) = 747
-		//(27, 155) and (27, 688) = 533
-		//System.out.println(mouse);
-		mouse = mouse.add(new Vector2(-27, -155));
-		//System.out.println(mouse);
-		Vector3 paddleCoords = new Vector3(mouse.getX(), mouse.getY(), 50);
-		//System.out.println(paddleCoords);
-		paddleCoords = paddleCoords.multiply(new Vector3(140.0/747.0, 100.0/533.0, 1.0));
-		//System.out.println(paddleCoords);
-		paddleCoords = new Vector3(paddleCoords.getX() - 70, 50 - paddleCoords.getY(), paddleCoords.getZ());
-		//System.out.println("\n");
-		paddle.setCenter(paddleCoords);
 	}
 	
 	public void addObject(GameObject obj)
@@ -86,7 +50,7 @@ public class Workspace3D
 	{
 		ball.step();
 		stepTracer();
-		//camera.setPosition(camera.getPosition().add(new Vector3(.25*ball.getVelocity().getX(), .25*ball.getVelocity().getY(), 0)));
+		//camera.setPosition(camera.getPosition().add(ball.getVelocity()));
 	}
 	
 	public void stepTracer()

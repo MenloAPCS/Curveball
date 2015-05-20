@@ -13,11 +13,8 @@ import javax.swing.JFrame;
 public class Curveball extends JFrame implements
 	MouseListener, MouseMotionListener
 {
-	public static final int WINDOW_SIZE = 800;
+	public static final int WINDOW_SIZE = 512;
 	public static final int HEADER_Y = 20;
-	
-	public static final int FRAMES_PER_SEC = 50;
-	public static final int MILLISEC_DELAY = 1000 / FRAMES_PER_SEC;
 	
 	public static final int NUM_DIVIDERS = 10;
 	
@@ -26,8 +23,7 @@ public class Curveball extends JFrame implements
 	public static final Vector3 BALL_START = new Vector3(0, 0, 65);
 	
 	public static final double BALL_RADIUS = 8.2;
-	public static final double BALL_Z_ACCEL = 0.08;
-	public static final double BALL_SPEED = 3.0;
+	public static final double BALL_Z_ACCEL = 0.4;
 	public static final Color BALL_COLOR = Color.GREEN;
 	
 	private Workspace3D workspace;
@@ -64,6 +60,8 @@ public class Curveball extends JFrame implements
 			LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER,
 			BALL_Z_ACCEL, BALL_COLOR
 		);
+		ball.setAcceleration(new Vector3(0, 0, 0));
+		ball.setVelocity(new Vector3(0, 0, -5));
 		workspace = new Workspace3D(ball);
 		Cube bounds = new Cube(LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER);
 		workspace.addObject(bounds);
@@ -83,14 +81,11 @@ public class Curveball extends JFrame implements
 	{
 		while(true)
 		{
-			if(workspace.isRunning())
-			{
-				workspace.step();
-				repaint();
-			}
+			workspace.step();
+			repaint();
 			try
 			{
-				Thread.sleep(MILLISEC_DELAY);
+				Thread.sleep(15);
 			}
 			catch (InterruptedException e)
 			{
@@ -115,20 +110,15 @@ public class Curveball extends JFrame implements
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e)
+	public void mouseMoved(MouseEvent arg0) 
 	{
-		if(workspace.isRunning())
-		{
-			workspace.movePaddle(new Vector2(e.getX(), e.getY()));
-		}
+	
 	}
 
-	public void mouseClicked(MouseEvent e) {
-		System.out.println(new Vector2(e.getX(), e.getY()));
-		if(!workspace.isRunning())
-		{
-			workspace.start();
-		}
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
