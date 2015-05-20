@@ -125,6 +125,8 @@ public class Ball extends Sphere
 				}
 				else
 				{
+					Curveball gm = new Curveball();
+					gm.main(null);
 					System.out.println("Die!");
 					System.exit(0);
 				}
