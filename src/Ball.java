@@ -107,8 +107,7 @@ public class Ball extends Sphere
 			nextPos.getZ() - radius < lowerLeftBound.getZ()
 		)
 		{
-<<<<<<< HEAD
-=======
+
 			if(nextPos.getZ() - radius < lowerLeftBound.getZ())
 			{
 				Vector3 paddlePos3D = paddle.getCenter();
@@ -133,7 +132,6 @@ public class Ball extends Sphere
 					System.exit(0);
 				}
 			}
->>>>>>> 7a457e1da883d2f7a80dc3fe27ccb0f1f7d78534
 			velocity = velocity.multiply(new Vector3(1, 1, -1));
 		}
 	}
