@@ -107,6 +107,33 @@ public class Ball extends Sphere
 			nextPos.getZ() - radius < lowerLeftBound.getZ()
 		)
 		{
+<<<<<<< HEAD
+=======
+			if(nextPos.getZ() - radius < lowerLeftBound.getZ())
+			{
+				Vector3 paddlePos3D = paddle.getCenter();
+				Vector2 paddlePos = new Vector2((int) paddlePos3D.getX(), (int) paddlePos3D.getY());
+				
+				if(
+					Math.abs(nextPos.getX() - paddlePos.getX()) < paddle.getWidth() &&
+					Math.abs(nextPos.getY() - paddlePos.getY()) < paddle.getHeight()
+				)
+				{
+					Vector2 ballAccel = paddle.getVelocity().multiply(new Vector2(-1, -1));
+					Vector3 ballAccel3D = new Vector3(ballAccel.getX(), ballAccel.getY(), Curveball.BALL_Z_ACCEL);
+					ballAccel3D = ballAccel3D.multiply(new Vector3(0.01, 0.01, 1.0));
+					System.out.println("Accel: " + ballAccel3D);
+					setAcceleration(ballAccel3D);
+				}
+				else
+				{
+					Curveball gm = new Curveball();
+					gm.main(null);
+					System.out.println("Die!");
+					System.exit(0);
+				}
+			}
+>>>>>>> 7a457e1da883d2f7a80dc3fe27ccb0f1f7d78534
 			velocity = velocity.multiply(new Vector3(1, 1, -1));
 		}
 	}

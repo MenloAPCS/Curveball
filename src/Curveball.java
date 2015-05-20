@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 
 public class Curveball extends JFrame implements
-	KeyListener, MouseListener, MouseMotionListener
+	MouseListener, MouseMotionListener
 {
 	public static final int WINDOW_SIZE = 800;
 	public static final int HEADER_Y = 20;
@@ -46,7 +46,6 @@ public class Curveball extends JFrame implements
 		gp.setBackground(Color.BLACK);
 		
 		//Add listeners
-		gp.addKeyListener(gp);
 		gp.addMouseListener(gp);
 		gp.addMouseMotionListener(gp);
 		gp.start();
@@ -152,24 +151,6 @@ public class Curveball extends JFrame implements
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
