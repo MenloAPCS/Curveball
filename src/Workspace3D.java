@@ -10,6 +10,7 @@ public class Workspace3D
 	private Ball ball;
 	private Cube tracer;
 	private Paddle playerPaddle;
+	private Paddle enemyPaddle;
 	
 	private boolean isRunning = false;
 	
@@ -17,6 +18,11 @@ public class Workspace3D
 	{
 		camera = new Camera(new Vector3(0, 0, -100), new Vector3(0, 0, 0));
 		objects = new ArrayList<GameObject>();
+		float rgb = (float) 0.8;
+		float alpha = (float) 0.7;
+		Color paddleColor = new Color(rgb, rgb, rgb, alpha);
+		enemyPaddle = new Paddle(new Vector3(0, 0, 500), 32.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor);
+		objects.add(enemyPaddle);
 		objects.add(ballIn);
 		ball = ballIn;
 		Vector3 ballLowerLeft = ball.getLowerLeft();
@@ -26,10 +32,7 @@ public class Workspace3D
 		System.out.println(cubeLowerLeft + " " + cubeUpperRight);
 		tracer = new Cube(cubeLowerLeft, cubeUpperRight, Color.WHITE);
 		objects.add(tracer);
-		float rgb = (float) 0.8;
-		float alpha = (float) 0.7;
 		System.out.println(alpha);
-		Color paddleColor = new Color(rgb, rgb, rgb, alpha);
 		playerPaddle = new Paddle(new Vector3(0, 0, 50), 32.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor);
 		objects.add(playerPaddle);
 		System.out.println(tracer);
@@ -55,15 +58,10 @@ public class Workspace3D
 	{
 		//(27, 155) and (774, 155) = 747
 		//(27, 155) and (27, 688) = 533
-		//System.out.println(mouse);
 		mouse = mouse.add(new Vector2(-27, -155));
-		//System.out.println(mouse);
 		Vector3 paddleCoords = new Vector3(mouse.getX(), mouse.getY(), 50);
-		//System.out.println(paddleCoords);
 		paddleCoords = paddleCoords.multiply(new Vector3(140.0/747.0, 100.0/533.0, 1.0));
-		//System.out.println(paddleCoords);
 		paddleCoords = new Vector3(paddleCoords.getX() - 70, 50 - paddleCoords.getY(), paddleCoords.getZ());
-		//System.out.println("\n");
 		playerPaddle.setCenter(paddleCoords);
 	}
 	
@@ -84,9 +82,33 @@ public class Workspace3D
 	
 	public void step()
 	{
-		ball.step(playerPaddle);
+		stepEnemy();
+		ball.step(playerPaddle, enemyPaddle);
 		stepTracer();
-		//camera.setPosition(camera.getPosition().add(new Vector3(.25*ball.getVelocity().getX(), .25*ball.getVelocity().getY(), 0)));
+	}
+	
+	public void stepEnemy()
+	{
+		Vector3 enemyCenter = enemyPaddle.getCenter();
+		Vector3 ballCenter = ball.getCenter();
+		if(enemyCenter.getX() < ballCenter.getX())
+		{
+			enemyCenter = enemyCenter.add(new Vector3(1, 0, 0));
+		}
+		else
+		{
+			enemyCenter = enemyCenter.add(new Vector3(-1, 0, 0));
+		}
+		
+		if(enemyCenter.getY() < ballCenter.getY())
+		{
+			enemyCenter = enemyCenter.add(new Vector3(0, 1, 0));
+		}
+		else
+		{
+			enemyCenter = enemyCenter.add(new Vector3(0, -1, 0));
+		}
+		enemyPaddle.setCenter(enemyCenter);
 	}
 	
 	public void stepTracer()

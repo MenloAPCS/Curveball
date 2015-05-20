@@ -74,17 +74,17 @@ public class Ball extends Sphere
 		return upperRightBound;
 	}
 	
-	public void step(Paddle paddle)
+	public void step(Paddle playerPaddle, Paddle enemyPaddle)
 	{
 		//System.out.println("Step!");
 		//System.out.println("c: " + super.getCenter() + ", v: " + velocity + ", a: " + acceleration);
 		velocity = velocity.add(acceleration);
 		Vector3 center = super.getCenter();
-		adjustForCollisions(center, paddle);
+		adjustForCollisions(center, playerPaddle, enemyPaddle);
 		super.setCenter(center.add(velocity));
 	}
 	
-	private void adjustForCollisions(Vector3 center, Paddle paddle)
+	private void adjustForCollisions(Vector3 center, Paddle playerPaddle, Paddle enemyPaddle)
 	{
 		Vector3 nextPos = center.add(velocity);
 		double radius = super.getRadius();
@@ -109,18 +109,17 @@ public class Ball extends Sphere
 		{
 			if(nextPos.getZ() - radius < lowerLeftBound.getZ())
 			{
-				Vector3 paddlePos3D = paddle.getCenter();
+				Vector3 paddlePos3D = playerPaddle.getCenter();
 				Vector2 paddlePos = new Vector2((int) paddlePos3D.getX(), (int) paddlePos3D.getY());
 				
 				if(
-					Math.abs(nextPos.getX() - paddlePos.getX()) < paddle.getWidth() &&
-					Math.abs(nextPos.getY() - paddlePos.getY()) < paddle.getHeight()
+					Math.abs(nextPos.getX() - paddlePos.getX()) < playerPaddle.getWidth() &&
+					Math.abs(nextPos.getY() - paddlePos.getY()) < playerPaddle.getHeight()
 				)
 				{
-					Vector2 ballAccel = paddle.getVelocity().multiply(new Vector2(-1, -1));
+					Vector2 ballAccel = playerPaddle.getVelocity().multiply(new Vector2(-1, -1));
 					Vector3 ballAccel3D = new Vector3(ballAccel.getX(), ballAccel.getY(), Curveball.BALL_Z_ACCEL);
 					ballAccel3D = ballAccel3D.multiply(new Vector3(0.01, 0.01, 1.0));
-					System.out.println("Accel: " + ballAccel3D);
 					setAcceleration(ballAccel3D);
 				}
 				else
@@ -128,6 +127,29 @@ public class Ball extends Sphere
 					Curveball gm = new Curveball();
 					gm.main(null);
 					System.out.println("Die!");
+					System.exit(0);
+				}
+			}
+			else if(nextPos.getZ() + radius > lowerLeftBound.getZ())
+			{
+				Vector3 paddlePos3D = enemyPaddle.getCenter();
+				Vector2 paddlePos = new Vector2((int) paddlePos3D.getX(), (int) paddlePos3D.getY());
+				
+				if(
+					Math.abs(nextPos.getX() - paddlePos.getX()) < enemyPaddle.getWidth() &&
+					Math.abs(nextPos.getY() - paddlePos.getY()) < enemyPaddle.getHeight()
+				)
+				{
+					Vector2 ballAccel = enemyPaddle.getVelocity().multiply(new Vector2(-1, -1));
+					Vector3 ballAccel3D = new Vector3(ballAccel.getX(), ballAccel.getY(), Curveball.BALL_Z_ACCEL);
+					ballAccel3D = ballAccel3D.multiply(new Vector3(0.01, 0.01, 1.0));
+					setAcceleration(ballAccel3D);
+				}
+				else
+				{
+					Curveball gm = new Curveball();
+					gm.main(null);
+					System.out.println("Win!");
 					System.exit(0);
 				}
 			}
