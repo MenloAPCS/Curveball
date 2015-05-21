@@ -13,6 +13,8 @@ public class Paddle extends Rectangle
 	private double width;
 	private double height;
 	
+	private int lives;
+	
 	public Paddle(Vector3 center, double widthIn, double heightIn, Vector2 upperRightBoundIn, Vector2 lowerLeftBoundIn, Color colorIn)
 	{
 		super(center, widthIn, heightIn);
@@ -37,6 +39,16 @@ public class Paddle extends Rectangle
 	public double getHeight()
 	{
 		return height;
+	}
+	
+	public int getLives()
+	{
+		return lives;
+	}
+	
+	public void minusLives()
+	{
+		lives--;
 	}
 	
 	public void setCenter(Vector3 center)
