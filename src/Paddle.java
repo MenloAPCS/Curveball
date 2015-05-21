@@ -13,9 +13,10 @@ public class Paddle extends Rectangle
 	private double width;
 	private double height;
 	
+	private Color colorOutline;
 	private int lives;
 	
-	public Paddle(Vector3 center, double widthIn, double heightIn, Vector2 upperRightBoundIn, Vector2 lowerLeftBoundIn, Color colorIn)
+	public Paddle(Vector3 center, double widthIn, double heightIn, Vector2 upperRightBoundIn, Vector2 lowerLeftBoundIn, Color colorIn, Color colorOutlineIn)
 	{
 		super(center, widthIn, heightIn);
 		upperRightBound = upperRightBoundIn.add(new Vector2((int) -widthIn/2, (int) -heightIn/2));
@@ -24,6 +25,7 @@ public class Paddle extends Rectangle
 		width = widthIn;
 		height = heightIn;
 		super.setColor(colorIn);
+		colorOutline = colorOutlineIn;
 	}
 	
 	public Vector2 getVelocity()
@@ -96,5 +98,7 @@ public class Paddle extends Rectangle
 		int width = second.getX() - x;
 		int height = second.getY() - y;
 		g.fillRect(x, y, width, height);
+		g.setColor(colorOutline);
+		g.drawRect(x, y, width, height);
 	}
 }

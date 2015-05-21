@@ -21,7 +21,7 @@ public class Workspace3D
 		float rgb = (float) 0.8;
 		float alpha = (float) 0.7;
 		Color paddleColor = new Color(rgb, rgb, rgb, alpha);
-		enemyPaddle = new Paddle(new Vector3(0, 0, 500), 32.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor);
+		enemyPaddle = new Paddle(new Vector3(0, 0, 500), 32.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor, Color.red);
 		objects.add(enemyPaddle);
 		objects.add(ballIn);
 		ball = ballIn;
@@ -33,7 +33,7 @@ public class Workspace3D
 		tracer = new Cube(cubeLowerLeft, cubeUpperRight, Color.WHITE);
 		objects.add(tracer);
 		System.out.println(alpha);
-		playerPaddle = new Paddle(new Vector3(0, 0, 50), 32.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor);
+		playerPaddle = new Paddle(new Vector3(0, 0, 50), 32.0, 18.0, new Vector2(70, 50), new Vector2(-70, -50), paddleColor, Color.blue);
 		objects.add(playerPaddle);
 		System.out.println(tracer);
 	}
