@@ -82,33 +82,34 @@ public class Workspace3D
 	
 	public void step()
 	{
-		stepEnemy();
+		stepEnemy(1);
 		ball.step(playerPaddle, enemyPaddle);
 		stepTracer();
 	}
 	
-	public void stepEnemy()
+	public void stepEnemy(int level)
 	{
 		Vector3 enemyCenter = enemyPaddle.getCenter();
 		Vector3 ballCenter = ball.getCenter();
 		if(enemyCenter.getX() < ballCenter.getX())
 		{
-			enemyCenter = enemyCenter.add(new Vector3(1, 0, 0));
+			enemyCenter = enemyCenter.add(new Vector3(level, 0, 0));
 		}
 		else
 		{
-			enemyCenter = enemyCenter.add(new Vector3(-1, 0, 0));
+			enemyCenter = enemyCenter.add(new Vector3(-level, 0, 0));
 		}
 		
 		if(enemyCenter.getY() < ballCenter.getY())
 		{
-			enemyCenter = enemyCenter.add(new Vector3(0, 1, 0));
+			enemyCenter = enemyCenter.add(new Vector3(0, level, 0));
 		}
 		else
 		{
-			enemyCenter = enemyCenter.add(new Vector3(0, -1, 0));
+			enemyCenter = enemyCenter.add(new Vector3(0, -level, 0));
 		}
 		enemyPaddle.setCenter(enemyCenter);
+		System.out.println(level);
 	}
 	
 	public void stepTracer()
