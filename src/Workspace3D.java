@@ -85,6 +85,7 @@ public class Workspace3D
 		stepEnemy(1);
 		ball.step(playerPaddle, enemyPaddle);
 		stepTracer();
+		camera.setPosition(camera.getPosition().add(new Vector3(ball.getVelocity().getX()*0.1, ball.getVelocity().getY()*0.1, 0.0)));
 	}
 	
 	public void stepEnemy(int level)

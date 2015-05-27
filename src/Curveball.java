@@ -1,10 +1,14 @@
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.util.HashSet;
 
 import javax.swing.JFrame;
@@ -48,6 +52,17 @@ public class Curveball extends JFrame implements
 		//Add listeners
 		gp.addMouseListener(gp);
 		gp.addMouseMotionListener(gp);
+		
+		// Transparent 16 x 16 pixel cursor image.
+		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+
+		// Create a new blank cursor.
+		Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+		    cursorImg, new Point(0, 0), "blank cursor");
+
+		// Set the blank cursor to the JFrame.
+		gp.getContentPane().setCursor(blankCursor);
+		
 		gp.start();
 	}
 	
