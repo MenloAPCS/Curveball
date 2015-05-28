@@ -66,12 +66,18 @@ public class Curveball extends JFrame implements
 		gp.start();
 	}
 	
+	/**
+	 * Starts a new Curveball game.
+	 */
 	public void start()
 	{
 		setupWorkspace();
 		loopGame();
 	}
 	
+	/**
+	 * Sets up 3D workspace of game (ball, paddles, etc).
+	 */
 	private void setupWorkspace()
 	{
 		Ball ball = new Ball(
@@ -80,8 +86,12 @@ public class Curveball extends JFrame implements
 			BALL_Z_ACCEL, BALL_COLOR
 		);
 		workspace = new Workspace3D(ball);
+		
+		//sets up area that ball can bounce in
 		Cube bounds = new Cube(LOWER_LEFT_CORNER, UPPER_RIGHT_CORNER);
 		workspace.addObject(bounds);
+		
+		//add periodic squares around area to create perspective
 		int zDistance = (int) (UPPER_RIGHT_CORNER.getZ() - LOWER_LEFT_CORNER.getZ());
 		int interval = zDistance / (NUM_DIVIDERS + 1);
 		for(int i = 1; i <= NUM_DIVIDERS; i++)
@@ -94,12 +104,16 @@ public class Curveball extends JFrame implements
 		}
 	}
 	
+	/**
+	 * Loops through game until complete.
+	 */
 	private void loopGame()
 	{
 		while(true)
 		{
 			if(workspace.isRunning())
 			{
+				//only runs if game has started (by user clicking)
 				workspace.step();
 				repaint();
 			}
@@ -114,11 +128,14 @@ public class Curveball extends JFrame implements
 		}
 	}
 	
+	/**
+	 * Displays the current state of the game.
+	 */
 	public void paint(Graphics g)
 	{
-		//make buttons / labels here
 		if(workspace != null)
 		{
+			//Renders 3D workspace
 			workspace.render(g);
 		}
 	}
@@ -126,22 +143,28 @@ public class Curveball extends JFrame implements
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
+	/**
+	 * Called when mouse is moved to move paddle.
+	 */
 	public void mouseMoved(MouseEvent e)
 	{
 		if(workspace.isRunning())
 		{
+			//only moves paddle if game has started
 			workspace.movePaddle(new Vector2(e.getX(), e.getY()));
 		}
 	}
 
+	/**
+	 * Called when mouse is clicked to start game.
+	 */
 	public void mouseClicked(MouseEvent e) {
 		System.out.println(new Vector2(e.getX(), e.getY()));
 		if(!workspace.isRunning())
 		{
+			//only starts game is game isn't running
 			workspace.start();
 		}
 	}

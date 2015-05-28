@@ -4,8 +4,16 @@ import java.awt.Graphics;
 
 public class Cube extends GameObject
 {
+	//constructs cube based on 2 points (assuming it's parallel to the axes)
 	private Vector3 lowerLeft;
 	private Vector3 upperRight;
+	
+	/**
+	 * Initializes a new Cube object.
+	 * 
+	 * @param lowerLeftIn	lower left (close) bound of cube
+	 * @param upperRightIn	upper right (far) bound of cube
+	 */
 	public Cube(Vector3 lowerLeftIn, Vector3 upperRightIn)
 	{
 		super(
@@ -15,6 +23,13 @@ public class Cube extends GameObject
 		upperRight = upperRightIn;
 	}
 	
+	/**
+	 * Initializes a new Cube object.
+	 * 
+	 * @param lowerLeftIn	lower left (close) bound of cube
+	 * @param upperRightIn	upper right (far) bound of cube
+	 * @param colorIn		starting color of cube
+	 */
 	public Cube(Vector3 lowerLeftIn, Vector3 upperRightIn, Color colorIn)
 	{
 		super(
@@ -24,29 +39,56 @@ public class Cube extends GameObject
 		upperRight = upperRightIn;
 	}
 	
+	/**
+	 * Sets the lower left (close) bound of the cube
+	 * 
+	 * @param lowerLeftIn	3D position of new bound
+	 */
 	public void setLowerLeft(Vector3 lowerLeftIn)
 	{
 		lowerLeft = lowerLeftIn;
 	}
 	
+	/**
+	 * Sets the upper right (far) bound of the cube
+	 * 
+	 * @param upperRightIn	3D position of new bound
+	 */
 	public void setUpperRight(Vector3 upperRightIn)
 	{
 		upperRight = upperRightIn;
 	}
 	
+	/**
+	 * Gets the current lower left (close) bound of the cube
+	 * 
+	 * @return 3D position of current bound
+	 */
 	public Vector3 getLowerLeft()
 	{
 		return lowerLeft;
 	}
 	
+	/**
+	 * Gets the current upper right (far) bound of the cube
+	 * 
+	 * @return 3D position of current bound
+	 */
 	public Vector3 getUpperRight()
 	{
 		return upperRight;
 	}
 	
+	/**
+	 * Renders the cube in 2D space
+	 * 
+	 * @param g		Graphics object to draw on canvas
+	 * @param cam	Camera object to translate points appropriately
+	 */
 	public void render(Graphics g, Camera cam)
 	{
 		super.render(g, cam);
+		//get all 8 points of the cube
 		Vector3 p1 = upperRight;
 		Vector3 p2 = new Vector3(upperRight.getX(), lowerLeft.getY(), upperRight.getZ());
 		Vector3 p3 = new Vector3(lowerLeft.getX(), lowerLeft.getY(), upperRight.getZ());
@@ -57,6 +99,7 @@ public class Cube extends GameObject
 		Vector3 p7 = lowerLeft;
 		Vector3 p8 = new Vector3(lowerLeft.getX(), upperRight.getY(), lowerLeft.getZ());
 	
+		//translate the 8 points to 2D space
 		Vector2 d1 = translatePoint(p1, cam);
 		Vector2 d2 = translatePoint(p2, cam);
 		Vector2 d3 = translatePoint(p3, cam);
@@ -67,6 +110,7 @@ public class Cube extends GameObject
 		Vector2 d7 = translatePoint(p7, cam);
 		Vector2 d8 = translatePoint(p8, cam);
 		
+		//draw lines between the points to make the cube
 		g.drawLine(d1.getX(), d1.getY(), d2.getX(), d2.getY());
 		g.drawLine(d2.getX(), d2.getY(), d3.getX(), d3.getY());
 		g.drawLine(d3.getX(), d3.getY(), d4.getX(), d4.getY());
